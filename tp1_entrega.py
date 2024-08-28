@@ -43,22 +43,22 @@ n_val = np.arange(-18, 9, 1)
 
 # Grafico
 fig, axs = plt.subplots(2, 2)
-
+# Funcion original
 axs[0,0].stem(n_val, [h(n) for n in n_val],linefmt='k-', markerfmt='k.', basefmt=' ')
 axs[0,0].set_title('$h[n]$')
 axs[0,0].grid(True)
-
+# Paso como parametro [2n]
 axs[0,1].stem(n_val, [h(2*n) for n in n_val], linefmt='b-', markerfmt='b.', basefmt=' ' )
 axs[0,1].set_title('b) $h[2n]$')
 axs[0,1].grid(True)
-
+# Paso como parametro [n/2 + 4]
 axs[1,0].stem(n_val, [h(n/2 + 4) for n in n_val], linefmt='r-',markerfmt='r.', basefmt=' ')
 axs[1,0].set_title('d) $h[n/2 + 4]$')
 axs[1,0].grid(True)
-
+# Paso como parametro [-4n+4]
 axs[1,1].stem(n_val, [h(-4*n+4) for n in n_val],linefmt='g-', markerfmt='g.', basefmt=' ')
 axs[1,1].set_title('e) $h[-4n+4]$')
 axs[1,1].grid(True)
-
+fig.suptitle('Actividad 2 - Transformaciones b, d y e')
 plt.tight_layout()
 plt.show()
