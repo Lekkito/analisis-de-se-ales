@@ -171,7 +171,7 @@ d = 2 # Ancho del escalon
 T = sp.symbols('T')
 f3 = 1/T
 w3 = 2*sp.pi*f3
-# Calculo simbolicament ela expresion del coef. de la serie de Fourier compleja con f(t)=1
+# Calculo simbolicamente la expresion del coef. de la serie de Fourier compleja con f(t)=1
 expk3 = sp.integrate(sp.exp(-1*sp.I*k*w3*t), (t, -d/2, d/2))/T
 
 am = 25
