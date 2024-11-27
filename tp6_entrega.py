@@ -122,3 +122,48 @@ plt.show()
 
 # --- ACTIVIDAD 9 ---
 
+# Parámetros del problema
+temp_min = 0    
+temp_max = 100  
+sensibilidad = 10  # mV/°C
+
+t = np.linspace(0, 1, 100)
+signal = temp_max/2 * np.sin(2*np.pi*t) + temp_max/2
+
+# temperatura a mv
+signal_mv = signal * sensibilidad
+
+# Parámetros de cuantización
+n_bits = 7
+n_niveles = 2**n_bits
+particion = np.linspace(signal_mv.min(), signal_mv.max(), n_niveles-1)
+codigo1 = np.linspace(signal_mv.min(), signal_mv.max(), n_niveles)
+
+def quantize(signal, partitions, codebook):
+    indices = []
+    quanta = []
+    for datum in signal:
+        index = 0
+        while index < len(partitions) and datum > partitions[index]:
+            index += 1
+        indices.append(index)
+        quanta.append(codebook[index])
+    return indices, quanta
+
+# Hacer cuantización
+index1, quants1 = quantize(signal_mv, particion, codigo1)
+
+error1 = np.abs(signal_mv - quants1)
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, signal_mv, 'x', label='Señal Original')
+plt.plot(t, quants1, '*', label='Señal Cuantizada')
+plt.plot(t, error1, '+', label='Error')
+plt.title(f'Cuantización con {n_bits} bits')
+plt.xlabel('Tiempo')
+plt.ylabel('Voltaje (mV)')
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
